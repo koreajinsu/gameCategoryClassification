@@ -45,7 +45,7 @@ Y = df['genre']
 print("First Title:", X[0])
 print("First genre:", Y[0])
 
-# lemmatizer(형태소 분류기) 토큰화, stopwords정의
+# lemmatizer(형태소 분류기 / 표제어 추출기) 토큰화, stopwords정의
 lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words('english'))
 
