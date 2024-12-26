@@ -10,17 +10,17 @@ from tensorflow.keras.layers import Layer, Input, Embedding, LSTM, Dense, Dropou
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 from tensorflow.keras.optimizers import Adam
 
-# Restrict TensorFlow to GPU only
-physical_devices = tf.config.list_physical_devices('GPU')
-if physical_devices:
-    try:
-        tf.config.experimental.set_memory_growth(physical_devices[0], True)  # Prevent memory overflow
-        tf.config.set_visible_devices(physical_devices[0], 'GPU')
-        print("GPU is being used for training.")
-    except RuntimeError as e:
-        print(e)
-else:
-    print("No GPU found. Running on CPU.")
+# # Restrict TensorFlow to GPU only
+# physical_devices = tf.config.list_physical_devices('GPU')
+# if physical_devices:
+#     try:
+#         tf.config.experimental.set_memory_growth(physical_devices[0], True)  # Prevent memory overflow
+#         tf.config.set_visible_devices(physical_devices[0], 'GPU')
+#         print("GPU is being used for training.")
+#     except RuntimeError as e:
+#         print(e)
+# else:
+#     print("No GPU found. Running on CPU.")
 
 
 class AttentionWeightedSum(Layer):
@@ -93,10 +93,10 @@ def create_model(vocab_size, embedding_dim, max_len, num_classes):
 
 
 if __name__ == "__main__":
-    X_train = np.load('./news_data_X_train.npy', allow_pickle=True)
-    Y_train = np.load('./news_data_Y_train.npy', allow_pickle=True)
-    X_test = np.load('./news_data_X_test.npy', allow_pickle=True)
-    Y_test = np.load('./news_data_Y_test.npy', allow_pickle=True)
+    X_train = np.load('./datasets/news_data_X_train.npy', allow_pickle=True)
+    Y_train = np.load('./datasets/news_data_Y_train.npy', allow_pickle=True)
+    X_test = np.load('./datasets/news_data_X_test.npy', allow_pickle=True)
+    Y_test = np.load('./datasets/news_data_Y_test.npy', allow_pickle=True)
 
     print('X_train shape:', X_train.shape, 'Y_train shape:', Y_train.shape)
     print('X_test shape:', X_test.shape, 'Y_test shape:', Y_test.shape)
@@ -152,6 +152,6 @@ if __name__ == "__main__":
     print(f"Test Accuracy: {score[1]:.4f}")
 
     # Save the model in .h5 format
-    model.save('./final_model.h5', save_format='h5')
+    model.save('./models/final_model-2.h5', save_format='h5')
 
     print(f"Model saved as final_model.h5")
