@@ -15,12 +15,12 @@ def reduce_sum_custom(x):
     import tensorflow as tf  # Explicitly import TensorFlow inside the Lambda function
     return tf.reduce_sum(x, axis=1)
 
-# Load the test data
-X_test = np.load('./news_data_X_test.npy')
-Y_test = np.load('./news_data_Y_test.npy')
+# Load the test datax
+X_test = np.load('./datasets/news_data_X_test.npy')
+Y_test = np.load('./datasets/news_data_Y_test.npy')
 
 # Load the saved model from the .h5 file, passing the custom Lambda functions in custom_objects
-model = tf.keras.models.load_model('./final_model.h5', custom_objects={
+model = tf.keras.models.load_model('./models/final_model.h5', custom_objects={
     'attention_weighted_sum': attention_weighted_sum,
     'reduce_sum_custom': reduce_sum_custom
 })
